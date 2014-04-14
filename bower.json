@@ -1,0 +1,23 @@
+{
+  "name": "grunt-starter",
+  "version": "0.1.1",
+  "homepage": "https://github.com/caraya/grunt-starter",
+  "authors": [
+    "Carlos <carlos.araya@gmal.com>"
+  ],
+    "dependencies": {
+    "jquery": "*",
+    "d3": "*",
+    "bootstrap-sass": "*"
+  },
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
+

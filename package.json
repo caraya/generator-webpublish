@@ -1,0 +1,59 @@
+{
+  "name": "grunt-starter",
+  "version": "0.1.0",
+  "description": "Starting point for grunt-based front-end development projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/caraya/grunt-starter.git"
+  },
+  "author": "Carlos Araya",
+  "license":[
+    {
+      "type": "MIT",
+      "url": "http://caraya.mit-license.org/"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/caraya/grunt-starter/issues"
+  },
+  "homepage": "https://github.com/caraya/grunt-starter",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "app"
+  ],
+  "dependencies": {
+    "yeoman-generator": "~0.16.0",
+    "chalk": "~0.4.0"
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0"
+  },
+"devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-jasmine": "~0.5.2",
+    "grunt-contrib-mincss": "~0.3.2",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-sass": "~0.5.0",
+    "grunt-contrib-csslint": "~0.1.2",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-markdown": "~0.4.0",
+    "grunt-bower-task": "^0.3.4",
+    "marked": "~0.3.2",
+    "assembly": "~0.3.1",
+    "matchdep": "^0.3.0"
+  }
+}
+

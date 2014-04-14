@@ -74,9 +74,15 @@ var StarterGenerator = yeoman.generators.Base.extend({
 
   projectfiles: function () {
     this.copy('editorconfig', '.editorconfig');
+    // JSHint
     this.copy('jshintrc', '.jshintrc');
     // CSSLint configuration file
     this.copy('csslintrc', '.csslintrc');
+    // Git related
+    this.copy('gitattributes', '.gitattributes');
+    this.copy('gitignore', '.gitignore');
+    // Travis (if needed)
+    this.copy('travis.yml', '.travis.yml');
   }
 });
 

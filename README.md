@@ -1,4 +1,4 @@
-# generator-starter [![Build Status](https://secure.travis-ci.org/caraya/generator-starter.png?branch=master)](https://travis-ci.org/caraya/generator-starter)
+# generator-starter 
 
 > [Yeoman](http://yeoman.io) generator
 

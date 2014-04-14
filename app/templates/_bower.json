@@ -6,9 +6,11 @@
     "Carlos <carlos.araya@gmal.com>"
   ],
     "dependencies": {
-    "jquery": "*",
+    "lodash": "~2.4.1",
+    "jquery": "1.9.0",
     "d3": "*",
-    "bootstrap-sass": "*"
+    "bootstrap-sass": "*",
+    "polymer": "~0.2.2"
   },
   "license": "MIT",
   "private": true,

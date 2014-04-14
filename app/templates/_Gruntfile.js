@@ -60,7 +60,7 @@
           // As we develop the Gruntfile it is a good idea to hint it periodically
           // or use the watch:gruntfile task created below.
           gruntfile: {
-            src: ['_Gruntfile.js'],
+            src: ['Gruntfile.js'],
             options: {
               jshintrc: '.jshintrc'
             }
@@ -171,14 +171,14 @@
           // Rather than have another app to remember, we've configured Grunt to handle
           // the bower installation process. Look at the bower.json file if you have questions as to
           // what will get installed where.
-          // Currently configured for installation: jQuery, D3, Bootstrap-sass
+          // Currently configured for installation: lodash, jquery 1.9.0, d3, bootstrap-sass and polymer
           install: {
             options: {
               targetDir: 'app/lib',
               layout: 'byType',
               install: true,
               verbose: true,
-              cleanTargetDir: false,
+              cleanTargetDir: true,
               cleanBowerDir: false,
               bowerOptions: {}
             }
@@ -190,7 +190,7 @@
           // While developing the Gruntfile.js it's a good idea to watch it and run jshint  whenever we make a change
           // otherwise bugs become harder to track
           gruntfile: {
-            files: '_Gruntfile.js',
+            files: 'Gruntfile.js',
             tasks: ['jshint:gruntfile'],
           },
           // Watch all other files, and peform the appropriate task. We have Javascript, SASS and coffee.  We have both

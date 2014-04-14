@@ -5,10 +5,11 @@
   "authors": [
     "Carlos <carlos.araya@gmal.com>"
   ],
-    "dependencies": {
+  "dependencies": {
     "jquery": "*",
     "d3": "*",
-    "bootstrap-sass": "*"
+    "bootstrap-sass": "*",
+    "polymer": "~0.2.2"
   },
   "license": "MIT",
   "private": true,
@@ -20,4 +21,3 @@
     "tests"
   ]
 }
-

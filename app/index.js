@@ -49,20 +49,17 @@ var StarterGenerator = yeoman.generators.Base.extend({
     this.mkdir('app');
     //this.mkdir('templates');
 
-    // Create the local directories that will be required by grunt
+    // Create the local source directories that will be required by grunt
+
     // CSS is converted from SASS/SCSS
     this.mkdir('app/css');
     this.mkdir('source/sass');
     // JS is converted from COFFEE
     this.mkdir('app/js');
     this.mkdir('source/coffee');
-    // HTML is converted from markdown, using assemble
-    this.mkdir('source/content');
-    // Two types of documents: docs for documentation and site for website
-    // content
-    this.mkdir('source/content/docs');
-    this.mkdir('source/content/site');
-    //
+    // Create the files required for markdown/assemble use
+    // They wil be saved to the root of the app directory that has already
+    // been created
     this.mkdir('source/markdown/layout');
     this.mkdir('source/markdown/pages');
 

@@ -4,14 +4,14 @@
   module.exports = function (grunt) {
     grunt.initConfig({
       pkg: grunt.file.readJSON('package.json'),
-      copy: {
-        build: {
-          cwd: 'source',
-          src: [ '**' ],
-          dest: 'build',
-          expand: true
-        }
-      },
+//      copy: {
+//        source: {
+//          cwd: 'source',
+//          src: [ '**' ],
+//          dest: 'source',
+//          expand: true
+//        }
+//      },
       csslint: {
         // Make sure you lint your css files after you've converted the SASS into CSS,
         // Otherwise it will fail because there are no CSS files to inspect :
@@ -33,21 +33,24 @@
           options: {
             import: 2
           },
-          src: ['app/css/**/*.css']
+          src: ['source/css/**/*.css']
         },
         lax: {
           options: {
             import: false
           },
-          src: ['app/css/**/*.css']
+          src: ['source/css/**/*.css']
         }
       },
 
       assemble: {
         options: {
           layout: ['source/markdown/layout/default.hbs'],
-          flatten: true
-        },
+          expand: true,
+          // Do we want all the content flatened?
+          flatten: true,
+          dest: [ 'app' ]
+          },
         pages: {
           files: {
             'content/': ['source/markdown/pages/*.hbs']
@@ -67,7 +70,7 @@
           },
           // Hinting the rest of the other Javascript files
           source: {
-            src: ['build/js/**/*.js'],
+            src: ['source/js/**/*.js'],
             options: {
               jshintrc: '.jshintrc'
             }
@@ -79,7 +82,7 @@
             files: {
               //compile the coffee files into their own js files, we'll handle concatenation and
               // minification in a different task
-              'app/js/**/*.js': ['build/coffee/**/*.coffee']
+              'source/js/**/*.js': ['source/coffee/**/*.coffee']
             }
           }
         },
@@ -94,9 +97,9 @@
               sourcemap: true
             },
             expand: true,
-            cwd: 'build/sass/',
+            cwd: 'source/sass/**',
             src: ['*.scss'],
-            dest: 'app/css/*.css',
+            dest: 'source/css/',
             ext: '.css'
           },
           // dev will create an expanded version of the file to make sure that we can troubleshoot any problems.
@@ -109,9 +112,9 @@
               sourcemap: true
             },
             expand: true,
-            cwd: 'build/sass/',
+            cwd: 'source/sass/',
             src: ['*.scss'],
-            dest: 'app/css/',
+            dest: 'source/css/',
             ext: '.css'
           }
         },
@@ -125,14 +128,14 @@
           },
           js: {
             // concatenates all files under the JS directory.
-            src: ['build/js/**/*.js'],
-            dest: ['build/js/<%= pkg.name %>-<%= pkg.version %>-concat.js'],
+            src: ['source/js/**/*.js'],
+            dest: ['source/js/<%= pkg.name %>-<%= pkg.version %>-concat.js'],
             nonull: true
           },
           css: {
             // concatenate the css files
-            src: ['build/css/**/*.css'],
-            dest: ['app/css/<%= pkg.name %>-<%= pkg.version %>-concat.css'],
+            src: ['source/css/**/*.css'],
+            dest: ['source/css/<%= pkg.name %>-<%= pkg.version %>-concat.css'],
             nonull: true
           }
         },
@@ -142,16 +145,16 @@
             banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
             report: 'min',
             mangle: true,
-            sourceMap: 'app/js/<%= pkg.name %>-<%= pkg.version %>.map.js',
+            sourceMap: 'source/js/<%= pkg.name %>-<%= pkg.version %>.map.js',
             sourceMapRoot: '/',
             sourceMapPrefix: 1,
-            sourceMappingURL: 'app/js/<%= pkg.name %>-<%= pkg.version %>.map.js'
+            sourceMappingURL: 'source/js/<%= pkg.name %>-<%= pkg.version %>.map.js'
           },
           // We name the target production because there is no need to uglify
-          // our code unless we're staging a production build.
+          // our code unless we're staging a production source.
           production: {
             files: {
-              'app/js/<%= pkg.name %>-<%= pkg.version %>.min.js': ['build/js/<%= pkg.name %>-<%= pkg.version %>-concat.js']
+              'source/js/<%= pkg.name %>-<%= pkg.version %>.min.js': ['source/js/<%= pkg.name %>-<%= pkg.version %>-concat.js']
             }
           }
         },
@@ -162,7 +165,7 @@
             // we pick up the name from the concat:css task.
             // We only do this in production as development we want to see the  code as is, not as it was
             // minimized
-            src: 'build/css/<%= pkg.name %>-<%= pkg.version %>-concat.css',
+            src: 'source/css/<%= pkg.name %>-<%= pkg.version %>-concat.css',
             dest: 'app/css/<%= pkg.name %>-<%= pkg.version %>-min.css'
           }
         },
@@ -197,20 +200,20 @@
           // Javascript and Coffee because we have the choice to pull in Javascript from third party sources and we can
           // work on either Javascript or Coffeescript as we prefer.
           all: {
-            files: ['build/js/**/*.js', 'build/sass/**/*.scss', 'build/coffee/**/*.coffee'],
+            files: ['source/js/**/*.js', 'source/sass/**/*.scss', 'source/coffee/**/*.coffee'],
             tasks: ['jshint:source', 'sass:dev', 'coffee:compile']
           }
         },
 
         clean: {
             js: {
-              src: [ 'app/js/<%= pkg.name %>-<%= pkg.version %>.min.js', 'build/js/**/*.js']
+              src: [ 'app/js/<%= pkg.name %>-<%= pkg.version %>.min.js', 'source/js/**/*.js']
             },
             css: {
-              src: ['app/css/<%= pkg.name %>-<%= pkg.version %>-min.css', 'build/css/**/*.css']
+              src: ['app/css/<%= pkg.name %>-<%= pkg.version %>-min.css', 'source/css/**/*.css']
             },
-            build: {
-              src: ['build']
+            source: {
+              src: ['app/**']
             }
           }
         });

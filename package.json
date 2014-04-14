@@ -1,5 +1,5 @@
 {
-  "name": "grunt-starter",
+  "name": "generator-starter",
   "version": "0.1.0",
   "description": "Starting point for grunt-based front-end development projects",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/caraya/grunt-starter.git"
+    "url": "https://github.com/caraya/generator-starter.git"
   },
   "author": "Carlos Araya",
   "license":[
@@ -20,12 +20,8 @@
   "bugs": {
     "url": "https://github.com/caraya/grunt-starter/issues"
   },
-  "homepage": "https://github.com/caraya/grunt-starter",
   "engines": {
     "node": ">=0.10.0"
-  },
-  "scripts": {
-    "test": "mocha"
   },
   "files": [
     "app"
@@ -51,7 +47,6 @@
     "grunt-contrib-copy": "~0.5.0",
     "grunt-markdown": "~0.4.0",
     "grunt-bower-task": "^0.3.4",
-    "marked": "~0.3.2",
     "assembly": "~0.3.1",
     "matchdep": "^0.3.0"
   }

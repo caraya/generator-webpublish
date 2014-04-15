@@ -9,7 +9,10 @@
     "jquery": "*",
     "d3": "*",
     "bootstrap-sass": "*",
-    "polymer": "~0.2.2"
+    "polymer": "~0.2.2",
+    "bourbon": "*",
+    "neat": "1.4.0",
+    "compass-vanilla": "*"
   },
   "license": "MIT",
   "private": true,

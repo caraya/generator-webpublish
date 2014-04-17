@@ -43,20 +43,6 @@
         }
       },
 
-      assemble: {
-        options: {
-          layout: ['source/markdown/layout/default.hbs'],
-          expand: true,
-          // Do we want all the content flatened?
-          flatten: true,
-          dest: [ 'app' ]
-          },
-        pages: {
-          files: {
-            'content/': ['source/markdown/pages/*.hbs']
-          }
-        }
-      },
 
       jshint: {
           // We  have to separate hinting processes.
@@ -171,10 +157,11 @@
         },
 
         bower:  {
-          // Rather than have another app to remember, we've configured Grunt to handle
-          // the bower installation process. Look at the bower.json file if you have questions as to
-          // what will get installed where.
-          // Currently configured for installation: lodash, jquery 1.9.0, d3, bootstrap-sass and polymer
+          // * Rather than have another app to remember, we've configured Grunt to handle
+          // the bower installation process.
+          // * All libraries will get installed under app/lib
+          // * Currently configured for installation: lodash, jquery 1.9.0, d3, bootstrap-sass, 
+          // polymer, bourbon, bourbon neat and compass-vanilla
           install: {
             options: {
               targetDir: 'app/lib',
@@ -184,8 +171,15 @@
               cleanTargetDir: true,
               cleanBowerDir: false,
               bowerOptions: {}
-            }
           }
+        },
+
+        // Initially we had chosen Assemble as our static site generator. I've
+        // changed it to docpad as it's more flexible and it works better with
+        // the tools we already have in place.
+        docs: {
+          srcPath: 'source/markdown',
+          outPath: 'app/',
         },
 
         watch: {

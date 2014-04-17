@@ -46,7 +46,7 @@
     "grunt-contrib-csslint": "~0.1.2",
     "grunt-contrib-copy": "~0.5.0",
     "grunt-bower-task": "^0.3.4",
-    "assembly": "~0.3.1",
+    "grunt-docs": "~0.7.0",
     "matchdep": "^0.3.0"
   }
 }

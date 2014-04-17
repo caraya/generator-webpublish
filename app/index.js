@@ -62,6 +62,11 @@ var StarterGenerator = yeoman.generators.Base.extend({
     // been created
     this.mkdir('source/markdown/layout');
     this.mkdir('source/markdown/pages');
+    // Copy sample files to the right directories under markdown
+    this.copy('hello.html.md', 'source/markdown/pages/hello.html.md');
+    // Copy templates
+    this.copy('posts.html.eco', 'source/markdown/pages/posts.html.eco')
+    this.copy('default.html.eco', 'source/markdown/pages/default.html.eco')
 
     // Copy the package templates into their final location
     this.copy('_package.json', 'package.json');

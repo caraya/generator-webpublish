@@ -1,5 +1,6 @@
 (function () {
   'use strict';
+  var module, require;
 
   module.exports = function (grunt) {
     grunt.initConfig({
@@ -160,7 +161,7 @@
           // * Rather than have another app to remember, we've configured Grunt to handle
           // the bower installation process.
           // * All libraries will get installed under app/lib
-          // * Currently configured for installation: lodash, jquery 1.9.0, d3, bootstrap-sass, 
+          // * Currently configured for installation: lodash, jquery 1.9.0, d3, bootstrap-sass,
           // polymer, bourbon, bourbon neat and compass-vanilla
           install: {
             options: {
@@ -171,35 +172,35 @@
               cleanTargetDir: true,
               cleanBowerDir: false,
               bowerOptions: {}
-          }
-        },
+            }
+          },
 
-        // Initially we had chosen Assemble as our static site generator. I've
-        // changed it to docpad as it's more flexible and it works better with
-        // the tools we already have in place.
-        docs: {
-          srcPath: 'source/markdown',
-          outPath: 'app/',
-        },
+          docs: {
+          // Initially we had chosen Assemble as our static site generator. I've
+          // changed it to docpad as it's more flexible and it works better with
+          // the tools we already have in place.
+            srcPath: 'source/markdown',
+            outPath: 'app/',
+          },
 
-        watch: {
+          watch: {
           // Tracks changes on files and runs  specific tasks when changes are detected
           // While developing the Gruntfile.js it's a good idea to watch it and run jshint  whenever we make a change
           // otherwise bugs become harder to track
-          gruntfile: {
-            files: 'Gruntfile.js',
-            tasks: ['jshint:gruntfile'],
+            gruntfile: {
+              files: 'Gruntfile.js',
+              tasks: ['jshint:gruntfile'],
+            },
+            // Watch all other files, and peform the appropriate task. We have Javascript, SASS and coffee.  We have both
+            // Javascript and Coffee because we have the choice to pull in Javascript from third party sources and we can
+            // work on either Javascript or Coffeescript as we prefer.
+            all: {
+              files: ['source/js/**/*.js', 'source/sass/**/*.scss', 'source/coffee/**/*.coffee'],
+              tasks: ['jshint:source', 'sass:dev', 'coffee:compile']
+            }
           },
-          // Watch all other files, and peform the appropriate task. We have Javascript, SASS and coffee.  We have both
-          // Javascript and Coffee because we have the choice to pull in Javascript from third party sources and we can
-          // work on either Javascript or Coffeescript as we prefer.
-          all: {
-            files: ['source/js/**/*.js', 'source/sass/**/*.scss', 'source/coffee/**/*.coffee'],
-            tasks: ['jshint:source', 'sass:dev', 'coffee:compile']
-          }
-        },
 
-        clean: {
+          clean: {
             js: {
               src: [ 'app/js/<%= pkg.name %>-<%= pkg.version %>.min.js', 'source/js/**/*.js']
             },
@@ -210,7 +211,8 @@
               src: ['app/**']
             }
           }
-        });
+        }
+      })
 
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 

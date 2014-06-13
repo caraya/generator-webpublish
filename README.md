@@ -23,11 +23,10 @@ $ npm install -g yo
 
 Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
 
-To install generator-starter from npm, run:
+To install generator-starter from Github (it hasn't been uploaded to npm yet), run:
 
 ```
-$ npm install -g generator-starter
-```
+$ npm install -g https://github.com/caraya/generator-starter/tarball/master
 
 Finally, initiate the generator:
 

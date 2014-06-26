@@ -27,6 +27,7 @@ To install generator-starter from Github (it hasn't been uploaded to npm yet), r
 
 ```
 $ npm install -g https://github.com/caraya/generator-starter/tarball/master
+```
 
 Finally, initiate the generator:
 
@@ -43,4 +44,4 @@ If you'd like to get to know Yeoman better and meet some of his friends, [Grunt]
 
 ## License
 
-MIT
+[MIT](http://caraya.mit-license.org/)

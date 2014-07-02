@@ -14,6 +14,12 @@ var StarterGenerator = yeoman.generators.Base.extend({
         this.npmInstall();
       }
     });
+
+    this.on('end', function () {
+      if (this.options['installBowerDeps']){
+	this.installDependencies();
+      }
+    });
   },
 
   askFor: function () {
@@ -51,12 +57,14 @@ var StarterGenerator = yeoman.generators.Base.extend({
 
     // Create the local source directories that will be required by grunt
 
-    // CSS is converted from SASS/SCSS
+    // CSS is converted from SASS/SCSS but we can feed CSS directly
     this.mkdir('app/css');
     this.mkdir('source/sass');
-    // JS is converted from COFFEE
+    this.mkdir('source/css');
+    // JS is converted from COFFEE but we have the option to feed JS directly
     this.mkdir('app/js');
     this.mkdir('source/coffee');
+    this.mkdir('source/js');
     // Create the files required for markdown/assemble use
     // They wil be saved to the root of the app directory that has already
     // been created

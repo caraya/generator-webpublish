@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Don't want to create an npm account as I want to keep this private
+# Don't want to create an npm account as I want to keep this private until development is further along than where it is right now
 
 # Uninstall the existing version of the package
 npm uninstall -g generator-starter

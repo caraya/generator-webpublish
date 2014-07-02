@@ -1,3 +1,4 @@
+/*global module:false*/
 (function () {
   'use strict';
   var module, require;
@@ -5,14 +6,6 @@
   module.exports = function (grunt) {
     grunt.initConfig({
       pkg: grunt.file.readJSON('package.json'),
-//      copy: {
-//        source: {
-//          cwd: 'source',
-//          src: [ '**' ],
-//          dest: 'source',
-//          expand: true
-//        }
-//      },
       csslint: {
         // Make sure you lint your css files after you've converted the SASS into CSS,
         // Otherwise it will fail because there are no CSS files to inspect :

@@ -2,11 +2,11 @@
 (function () {
   'use strict';
   var module, require;
+  var grunt = require('grunt');
 
   module.exports = function (grunt) {
     grunt.initConfig({
       pkg: grunt.file.readJSON('package.json'),
-    },
       csslint: {
         // Make sure you lint your css files after you've converted the SASS into CSS,
         // Otherwise it will fail because there are no CSS files to inspect :
@@ -214,6 +214,5 @@
     //grunt.registerTask('default', ['jshint', 'connect', 'jasmine', 'sass:dev']);
     grunt.registerTask('cleanAll', ['clean:js', 'clean:css']);
     grunt.registerTask('jslint', ['jshint']);
-};
-
+  };
 }()); // This closes the anonymous function that wraps the use strict call

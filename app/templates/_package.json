@@ -1,21 +1,21 @@
 {
     "name": "grunt-starter",
     "version": "0.1.0",
-    "description": "Starting point for grunt-based front-end development projects",
+    "description": "Starting point for Yeoman based front-end development projects",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/caraya/grunt-starter.git"
+        "url": "https://github.com/caraya/generator-starter.git"
     },
     "author": "Carlos Araya",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/caraya/grunt-starter/issues"
+        "url": "https://github.com/caraya/generator-starter/issues"
     },
-    "homepage": "https://github.com/caraya/grunt-starter",
+    "homepage": "https://github.com/caraya/generator-starter",
     "files": [
         "app"
     ],
@@ -32,14 +32,13 @@
         "grunt-contrib-jshint": "~0.7.1",
         "grunt-contrib-watch": "~0.5.3",
         "grunt-contrib-concat": "~0.3.0",
-        "grunt-contrib-jasmine": "~0.5.2",
-        "grunt-contrib-mincss": "~0.3.2",
         "grunt-contrib-coffee": "~0.7.0",
         "grunt-contrib-sass": "~0.5.0",
         "grunt-contrib-csslint": "~0.1.2",
         "grunt-contrib-copy": "~0.5.0",
         "grunt-bower-task": "^0.3.4",
         "grunt-docs": "~0.7.0",
-        "matchdep": "^0.3.0"
+        "matchdep": "^0.3.0",
+        "grunt-contrib-clean": "^0.5.0"
     }
 }

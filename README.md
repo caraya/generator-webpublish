@@ -26,7 +26,7 @@ Yeoman travels light. He didn't pack any generators when he moved in. You can th
 To install generator-starter from Github (it hasn't been uploaded to npm yet), run:
 
 ```
-$ npm install -g https://github.com/caraya/generator-starter/tarball/master
+$ npm install -g generator-webpublish
 ```
 
 Finally, initiate the generator:

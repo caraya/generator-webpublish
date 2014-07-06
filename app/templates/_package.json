@@ -1,5 +1,5 @@
 {
-    "name": "grunt-starter",
+    "name": "generator-webpublish",
     "version": "0.1.0",
     "description": "Starting point for Yeoman based front-end development projects",
     "main": "index.js",
@@ -8,14 +8,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/caraya/generator-starter.git"
+        "url": "https://github.com/caraya/generator-webpublish.git"
     },
     "author": "Carlos Araya",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/caraya/generator-starter/issues"
+        "url": "https://github.com/caraya/generator-webpublish/issues"
     },
-    "homepage": "https://github.com/caraya/generator-starter",
+    "homepage": "https://github.com/caraya/generator-webpublish",
     "files": [
         "app"
     ],

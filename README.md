@@ -32,7 +32,7 @@ $ npm install -g generator-webpublish
 Finally, initiate the generator:
 
 ```
-$ yo starter
+$ yo webstarter¬
 ```
 
 ### Getting To Know Yeoman

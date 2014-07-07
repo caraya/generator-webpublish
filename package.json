@@ -2,6 +2,12 @@
   "name": "generator-webpublish",
   "version": "0.2.1-1",
   "description": "Starting point for grunt-based front-end development projects",
+  "keywords": [
+    "front-end",
+    "publishing",
+    "css",
+    "javascript"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,8 +16,12 @@
     "type": "git",
     "url": "https://github.com/caraya/generator-webpublish.git"
   },
-  "author": "Carlos Araya",
-  "license":[
+  "author": {
+    "name": "Carlos Araya",
+    "email": "carlos.araya@gmail.com",
+    "url": "http://publishing-project.rivendellweb.ne/"
+  },
+  "license": [
     {
       "type": "MIT",
       "url": "http://caraya.mit-license.org/"
@@ -33,7 +43,7 @@
   "peerDependencies": {
     "yo": ">=1.0.0"
   },
-"devDependencies": {
+  "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-uglify": "~0.2.7",
     "grunt-contrib-jshint": "~0.7.1",
@@ -47,7 +57,7 @@
     "grunt-contrib-copy": "~0.5.0",
     "grunt-bower-task": "^0.3.4",
     "grunt-docs": "~0.7.0",
-    "matchdep": "^0.3.0"
+    "matchdep": "^0.3.0",
+    "grunt-assemble": "^0.1.15"
   }
 }
-

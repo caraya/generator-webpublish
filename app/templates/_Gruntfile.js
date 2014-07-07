@@ -283,3 +283,4 @@
     grunt.registerTask('jslint', ['jshint']);
   };
 }()); // This closes the anonymous function that wraps the use strict call
+

@@ -1,2 +1,4 @@
+**/.DS_Store
+app/templates/_Gruntfile.js.orig
 node_modules/
 temp/

@@ -11,24 +11,28 @@
           banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
           report: 'min',
           mangle: true,
-          sourceMap: 'src/js/<%= pkg.name %>-<%= pkg.version %>.map.js',
+          sourceMap: 'source/js/<%= pkg.name %>-<%= pkg.version %>.map.js',
           sourceMapRoot: '/',
           sourceMapPrefix: 1,
-          sourceMappingURL: 'src/js/<%= pkg.name %>-<%= pkg.version %>.map.js'
+          sourceMappingURL: 'source/js/<%= pkg.name %>-<%= pkg.version %>.map.js'
         },
           // We name the target production because there is no need to uglify
           // our code unless we're staging a production build.
         production: {
             files: {
-              'src/js/<%= pkg.name %>-<%= pkg.version %>.min.js': ['src/js/<%= pkg.name %>-<%= pkg.version %>-concat.js']
+              'source/js/<%= pkg.name %>-<%= pkg.version %>.min.js': ['source/js/source/css/<%= pkg.name %>-<%= pkg.version %>-concat-prefixed.css']
             }
           }
         },
 
         jshint: {
-          // Hinting  the other Javascript files
+          // Hint the Gruntfile as you add things to it. You may or may not need this task.
+          gruntfile: {
+            src: 'Gruntfile.js'
+          },
+          // Hinting the other Javascript files
           source: {
-            src: ['src/js/**/*.js'],
+            src: ['source/js/**/*.js'],
             options: {
               jshintrc: 'jshintrc'
             }
@@ -45,9 +49,9 @@
               sourcemap: true
             },
             expand: true,
-            cwd: 'src/sass/',
+            cwd: 'source/sass/',
             src: ['**/*.scss'],
-            dest: 'src/css/',
+            dest: 'source/css/',
             ext: '.css'
           },
 
@@ -61,10 +65,37 @@
               sourcemap: true
             },
             expand: true,
-            cwd: 'src/sass/',
+            cwd: 'source/sass/',
             src: ['**/*.scss'],
-            dest: 'src/css/',
+            dest: 'source/css/',
             ext: '.css'
+          }
+        },
+
+        autoprefixer: {
+          // Experimenally creating an autoprefixer task using caniuse's database
+          // It is configured to check the last two versions of a browser, IE8
+          // The last two versions of IE are 9 and 10 so IE 9 should be taken care of
+          options: {
+            browsers: ['last 2 version',  'ie 8'],
+            map: true
+          },
+
+          // prefix the specified file
+          singleFile: {
+            options: {
+              // Target-specific options go here.
+            },
+            src: 'source/css/<%= pkg.name %>-<%= pkg.version %>-concat.css',
+            dest: 'source/css/<%= pkg.name %>-<%= pkg.version %>-concat-prefixed.css'
+          },
+          sourcemap: {
+            options: {
+              map: true
+            },
+            src: 'source/css/<%= pkg.name %>-<%= pkg.version %>-concat.css',
+            dest: 'source/css/<%= pkg.name %>-<%= pkg.version %>-concat-prefixed.css'
+            // -> dest/css/file.css, dest/css/file.css.map
           }
         },
 
@@ -77,14 +108,14 @@
           },
           js: {
             // concatenates all files under the JS directory.
-            src: ['src/js/**/*.js'],
-            dest: ['src/js/<%= pkg.name %>-<%= pkg.version %>-concat.js'],
+            src: ['source/js/**/*.js'],
+            dest: ['source/js/<%= pkg.name %>-<%= pkg.version %>-concat.js'],
             nonull: true
           },
           css: {
             // concatenate the css files
-            src: ['src/css/**/*.css'],
-            dest: ['src/css/<%= pkg.name %>-<%= pkg.version %>-concat.css'],
+            src: ['source/css/**/*.css'],
+            dest: ['source/css/<%= pkg.name %>-<%= pkg.version %>-concat.css'],
             nonull: true
           }
         },
@@ -95,14 +126,13 @@
           // rewrite your HTML to point it to the final location of the CSS and JS files.
           create: {
             expand: true,
-            cwd: 'markdown',
-            src: '* * /*.md', //make sure to fix the glob path
-            dest: 'html',
+            cwd: 'source/markdown',
+            src: '**/*.md', //make sure to fix the glob path
+            dest: 'app',
             ext: '.html'
           },
         },
-
-            // We've enabled Github Flavored Markdown for this project
+        // We've enabled Github Flavored Markdown for this project
         options: {
           markdownOptions: {
             gfm: true,
@@ -115,8 +145,8 @@
             // we pick up the name from the concat:css task.
             // We only do this in production as development we want to see the  code as is, not as it was
             // minimized
-            src: 'src/css/<%= pkg.name %>-<%= pkg.version %>-concat.css',
-            dest: 'src/css/<%= pkg.name %>-<%= pkg.version %>-min.css'
+            src: 'source/css/<%= pkg.name %>-<%= pkg.version %>-concat-prefixed.css',
+            dest: 'source/css/<%= pkg.name %>-<%= pkg.version %>-min.css'
           }
         },
 
@@ -125,17 +155,15 @@
             files: {
               //compile the coffee files into their own js files, we'll handle concatenation and
               // minification in a different task
-              'src/js/**/*.js': ['src/coffee/**/*.coffee']
+              'source/js/**/*.js': ['source/coffee/**/*.coffee']
             }
           }
         },
 
         bower: {
-          // Rather than have another app to remember, we've configured Grunt to handle
-          // the bower installation process. Look at the bower file if you have questions as to
-          // what will get installed where.
-          //
-          // Currently configured for installation:
+          // We have configured bower to install additional libraries. See the bower.json
+          // for more information and http://bower.io/ for more informaton about
+          // Bower
           install: {
             options: {
               targetDir: 'app/lib',
@@ -151,35 +179,68 @@
         watch: {
           // Tracks changes on files and runs  specific tasks when changes are detected
 
-          // While developing the Gruntfile.js it's a good idea to watch it and run jshint  whenever we make a change
-          // otherwise bugs become harder to track
+          // While developing the Gruntfile.js it's a good idea to watch it and run jshint
+          // whenever we make a change otherwise bugs become harder to track
           gruntfile: {
             files: 'Gruntfile.js',
             tasks: ['jshint:gruntfile'],
           },
-          // Watch all other files, and peform the appropriate task. We have Javascript, SASS and coffee.  We have both
-          // Javascript and Coffee because we have the choice to pull in Javascript from third party sources and we can
-          // work on either Javascript or Coffeescript as we prefer.
+          // Watch all other files, and peform the appropriate task. We have Javascript,
+          // SASS and coffee.  We have both Javascript and Coffee because we have the
+          // choice to pull in Javascript from third party sources and we can work on
+          // either Javascript or Coffeescript as we prefer.
           js: {
-            files: ['js/**/*.js', 'sass/**/*.scss', 'coffee/**/*.coffee'],
-            tasks: ['jshint:source', 'sass:dev', 'coffee:compile']
+            files: ['source/js/**/*.js'],
+            tasks: ['jshint:source']
           },
+
+          css: {
+            files: ['source/css/**/*.css'],
+            tasks: ['csslint:strict']
+          },
+
           sass: {
-            files: ['js/**/*.js', 'sass/**/*.scss', 'coffee/**/*.coffee'],
-            tasks: ['jshint:source', 'sass:dev', 'coffee:compile']
+            files: ['source/sass/**/*.scss'],
+            tasks: ['sass:dev']
           },
+
           coffee: {
-            files: ['js/**/*.js', 'sass/**/*.scss', 'coffee/**/*.coffee'],
-            tasks: ['jshint:source', 'sass:dev', 'coffee:compile']
+            files: ['source/coffee/**/*.coffee'],
+            tasks: ['coffee:compile']
           }
         },
 
         clean: {
+          // Clean up any compiled files. Zeroes the project to start again
             js: {
-              src: [ 'js/<%= pkg.name %>-<%= pkg.version %>.min.js', 'js/<%= pkg.name %>-<%= pkg.version %>-concat.js']
+              src: [
+                'source/js/<%= pkg.name %>-<%= pkg.version %>.min.js',
+                'source/js/<%= pkg.name %>-<%= pkg.version %>-concat.js'
+              ]
             },
             css: {
-              src: ['css/<%= pkg.name %>-<%= pkg.version %>-concat.css', 'css/<%= pkg.name %>-<%= pkg.version %>-min.css']
+              src: [
+                'source/css/<%= pkg.name %>-<%= pkg.version %>-concat.css',
+                'source/css/<%= pkg.name %>-<%= pkg.version %>-concat-prefixed.css',
+                'source/css/<%= pkg.name %>-<%= pkg.version %>-min.css'
+              ]
+            }
+          },
+
+          copy: {
+            js: {
+              files: [
+                {
+                  expand: true,
+                  src: ['/source/js/{a,b}'],
+                  dest: 'dest/'
+                }
+              ]
+            },
+            css: {
+              files: [
+                {expand: true, src: ['path/**'], dest: 'dest/'}
+              ]
             }
           },
 
@@ -187,7 +248,7 @@
             // Make sure you lint your css files after you've converted the SASS into CSS,
             // Otherwise it will fail because there are no CSS files to inspect :)
             options: {
-              // We are using an external file to load the rules  to make sure we can change them easier.
+            // We are using an external file to load the rules  to make sure we can change them easier.
               csslintrc: 'csslintrc',
               formatters: [
                 {

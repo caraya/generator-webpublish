@@ -212,6 +212,11 @@
 
         clean: {
           // Clean up any compiled files. Zeroes the project to start again
+            html: {
+              src: [
+                'app/**/*.html'
+              ]
+            },
             js: {
               src: [
                 'source/js/<%= pkg.name %>-<%= pkg.version %>.min.js',
@@ -273,13 +278,28 @@
               },
               src: ['css/**/*.css']
             }
+          },
+
+          assemble: {
+            options: {
+              'layout': 'src/layouts/default.hbs',
+              'flatten': true
+            },
+            pages: {
+              files: {
+                'app/': ['source/markdown/pages/**/*.hbs']
+                // We should be able to create more points after the default
+                // to indicate different groups of related content (different
+                // chapters in a book or directories in a site for example)
+              }
+            }
           }
         });
 
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
     // this will be our eventual default task once I figure out what it should be
     //grunt.registerTask('default', ['jshint', 'connect', 'jasmine', 'sass:dev']);
-    grunt.registerTask('cleanAll', ['clean:js', 'clean:css']);
+    grunt.registerTask('cleanAll', ['clean:html', 'clean:js', 'clean:css']);
     grunt.registerTask('jslint', ['jshint']);
   };
 }()); // This closes the anonymous function that wraps the use strict call

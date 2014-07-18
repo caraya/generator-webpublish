@@ -254,7 +254,7 @@
             // Otherwise it will fail because there are no CSS files to inspect :)
             options: {
             // We are using an external file to load the rules  to make sure we can change them easier.
-              csslintrc: 'csslintrc',
+              csslintrc: '.csslintrc',
               formatters: [
                 {
                   id: 'text',

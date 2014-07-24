@@ -94,7 +94,7 @@
               map: true
             },
             src: 'source/css/<%= pkg.name %>-<%= pkg.version %>-concat.css',
-            dest: 'source/css/<%= pkg.name %>-<%= pkg.version %>-concat-prefixed.css'
+            dest: 'source/css/<%= pkg.name %>-<%= pkg.version %>-concat-prefixed.css.map'
             // -> dest/css/file.css, dest/css/file.css.map
           }
         },
@@ -117,25 +117,6 @@
             src: ['source/css/**/*.css'],
             dest: ['source/css/<%= pkg.name %>-<%= pkg.version %>-concat.css'],
             nonull: true
-          }
-        },
-
-        markdown: {
-          // All the documentation is written in Markdown and we also have the option of
-          // writing the content in Markdown using this task. Be aware that we will not
-          // rewrite your HTML to point it to the final location of the CSS and JS files.
-          create: {
-            expand: true,
-            cwd: 'source/markdown',
-            src: '**/*.md', //make sure to fix the glob path
-            dest: 'app',
-            ext: '.html'
-          },
-        },
-        // We've enabled Github Flavored Markdown for this project
-        options: {
-          markdownOptions: {
-            gfm: true,
           }
         },
 
@@ -176,40 +157,6 @@
             }
           }
         },
-        watch: {
-          // Tracks changes on files and runs  specific tasks when changes are detected
-
-          // While developing the Gruntfile.js it's a good idea to watch it and run jshint
-          // whenever we make a change otherwise bugs become harder to track
-          gruntfile: {
-            files: 'Gruntfile.js',
-            tasks: ['jshint:gruntfile'],
-          },
-          // Watch all other files, and peform the appropriate task. We have Javascript,
-          // SASS and coffee.  We have both Javascript and Coffee because we have the
-          // choice to pull in Javascript from third party sources and we can work on
-          // either Javascript or Coffeescript as we prefer.
-          js: {
-            files: ['source/js/**/*.js'],
-            tasks: ['jshint:source']
-          },
-
-          css: {
-            files: ['source/css/**/*.css'],
-            tasks: ['csslint:strict']
-          },
-
-          sass: {
-            files: ['source/sass/**/*.scss'],
-            tasks: ['sass:dev']
-          },
-
-          coffee: {
-            files: ['source/coffee/**/*.coffee'],
-            tasks: ['coffee:compile']
-          }
-        },
-
         clean: {
           // Clean up any compiled files. Zeroes the project to start again
             html: {
@@ -281,19 +228,89 @@
           },
 
           assemble: {
+            // All the content (documentation and publishable material) is written in
+            // Markdown and we also have the option of writing the content in
+            // Markdown using this task. Be aware that we will only rewrite your css
+            // to make use of UNCSS later on. That will require the templates to use
             options: {
-              'layout': 'src/layouts/default.hbs',
-              'flatten': true
+              // metadata
+              data: ['data/*.{json,yml}'],
+
+              // templates
+              partials: ['templates/includes/*.hbs'],
+              layout: ['templates/layouts/default.hbs'],
+
+              // extensions
+              middlweare: ['assemble-middleware-permalinks'],
             },
+
+            // This is really all you need!
             pages: {
+              src: ['docs/*.hbs'],
+              dest: './'
+            }
+          },
+
+          uncss: {
+            // UNCSS will look at the specified HTML and CSS files and generate new stylesheet
+            // that will only contain the CSS selectors that are actually used in the HTML files.
+            // This has two advantages:
+            // 1. It allows us to use large external libraries without being concerned with the size of
+            // of the resulting CSS and eliminating the bloated stylesheets they sometimes create
+            // 2. It allows the creation of a master CSS / SCSS library for all our projects and then
+            // only using the selectors we need
+            dist: {
+              options: {
+                ignore       : ['#added_at_runtime', /test\-[0-9]+/],
+                media        : ['(min-width: 700px) handheld and (orientation: landscape)'],
+                csspath      : '../public/css/',
+                raw          : 'h1 { color: green }',
+                stylesheets  : ['lib/bootstrap/dist/css/bootstrap.css', 'src/public/css/main.css'],
+                ignoreSheets : [/fonts.googleapis/],
+                urls         : ['http://localhost:3000/mypage', '...'], // Deprecated
+                timeout      : 1000,
+                htmlroot     : 'public',
+                report       : 'min'
+              },
               files: {
-                'app/': ['source/markdown/pages/**/*.hbs']
-                // We should be able to create more points after the default
-                // to indicate different groups of related content (different
-                // chapters in a book or directories in a site for example)
+                'dist/css/tidy.css': ['app/index.html', 'app/about.html']
               }
             }
-          }
+          },
+
+          watch: {
+            // Tracks changes on files and runs  specific tasks when changes are detected
+            // While developing the Gruntfile.js it's a good idea to watch it and run jshint
+            // whenever we make a change otherwise bugs become harder to track
+            gruntfile: {
+              files: 'Gruntfile.js',
+              tasks: ['jshint:gruntfile'],
+            },
+            // Watch all other files, and peform the appropriate task. We have Javascript,
+            // SASS and coffee.  We have both Javascript and Coffee because we have the
+            // choice to pull in Javascript from third party sources and we can work on
+            // either Javascript or Coffeescript as we prefer.
+            js: {
+              files: ['source/js/**/*.js'],
+              tasks: ['jshint:source']
+            },
+
+            css: {
+              files: ['source/css/**/*.css'],
+              tasks: ['csslint:strict']
+            },
+
+            sass: {
+              files: ['source/sass/**/*.scss'],
+              tasks: ['sass:dev']
+            },
+
+            coffee: {
+              files: ['source/coffee/**/*.coffee'],
+              tasks: ['coffee:compile']
+            }
+          },
+
         });
 
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);

@@ -8,29 +8,18 @@ var chalk = require('chalk');
 var StarterGenerator = yeoman.generators.Base.extend({
   init: function () {
     this.pkg = yeoman.file.readJSON(path.join(__dirname, '../package.json'));
-
-    this.on('end', function () {
-      if (!this.options['skip-install']) {
-        this.npmInstall();
-      }
-    });
-
-    this.on('end', function () {
-      if (this.options['installBowerDeps']){
-	this.installDependencies();
-      }
-    });
+    console.log(chalk.magenta('Initiating Generator'));
   },
-
+/*
   askFor: function () {
     var done = this.async();
 
     // have Yeoman greet the user
     console.log(this.yeoman);
 
-    // replace it with a short and sweet description of your generator
-    console.log(chalk.magenta('You\'re using the fantastic Starter generator.'));
 
+// replace it with a short and sweet description of your generator
+    console.log(chalk.magenta('webpublish generator is designed to ease your workload for  generating digital content.'));
     var prompts = [{
       type: 'confirm',
       name: 'loadBowerDeps',
@@ -50,7 +39,7 @@ var StarterGenerator = yeoman.generators.Base.extend({
       done();
     }.bind(this));
   },
-
+*/
   app: function () {
     this.mkdir('app');
     //this.mkdir('templates');
@@ -73,8 +62,8 @@ var StarterGenerator = yeoman.generators.Base.extend({
     // Copy sample files to the right directories under markdown
     this.copy('hello.html.md', 'source/markdown/pages/hello.html.md');
     // Copy templates
-    this.copy('posts.html.eco', 'source/markdown/pages/posts.html.eco')
-    this.copy('default.html.eco', 'source/markdown/pages/default.html.eco')
+    this.copy('posts.html.eco', 'source/markdown/pages/posts.html.eco');
+    this.copy('default.html.eco', 'source/markdown/pages/default.html.eco');
 
     // Copy the package templates into their final location
     this.copy('_package.json', 'package.json');

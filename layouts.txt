@@ -1,0 +1,45 @@
+[18:39:59] carlos@rivendell generator-webpublish 3693$ tree -l
+.
+├── LICENSE
+├── README.md
+├── app
+│   ├── index.js
+│   └── templates
+│       ├── _Gruntfile.js
+│       ├── _bower.json
+│       ├── _bowerrc
+│       ├── _config.json
+│       ├── _package.json
+│       ├── csslintrc
+│       ├── editorconfig
+│       ├── gitattributes
+│       ├── gitignore
+│       ├── hello.html.md
+│       ├── jshintrc
+│       ├── src
+│       │   ├── README.md
+│       │   ├── crossdomain.xml
+│       │   ├── gitattributes
+│       │   ├── gitignore
+│       │   ├── htaccess
+│       │   ├── humans.txt
+│       │   ├── index.html
+│       │   ├── js
+│       │   │   └── main.js
+│       │   ├── robots.txt
+│       │   ├── sass
+│       │   │   ├── base
+│       │   │   │   ├── _fonts.scss
+│       │   │   │   ├── _mymixins.scss
+│       │   │   │   └── _palette.scss
+│       │   │   └── main.scss
+│       │   └── travis.yml
+│       └── travis.yml
+├── bower.json
+├── docs
+├── layouts.txt
+├── package.json
+├── test
+│   ├── test-creation.js
+│   └── test-load.js
+└── update.sh

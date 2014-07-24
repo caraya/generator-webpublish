@@ -5,7 +5,7 @@ var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 
 
-var StarterGenerator = yeoman.generators.Base.extend({
+var GeneratorWebpublish = yeoman.generators.Base.extend({
   init: function () {
     this.pkg = yeoman.file.readJSON(path.join(__dirname, '../package.json'));
     console.log(chalk.magenta('Initiating Generator'));
@@ -50,27 +50,28 @@ var StarterGenerator = yeoman.generators.Base.extend({
     this.mkdir('app/css');
     this.mkdir('source/sass');
     this.mkdir('source/css');
-    // JS is converted from COFFEE but we have the option to feed JS directly
     this.mkdir('app/js');
+    // JS is converted from COFFEE but we have the option to feed JS directly
     this.mkdir('source/coffee');
     this.mkdir('source/js');
     // Create the files required for markdown/assemble use
     // They wil be saved to the root of the app directory that has already
     // been created
-    this.mkdir('source/markdown/layout');
-    this.mkdir('source/markdown/pages');
+    this.mkdir('source/content/layout');
+    this.mkdir('source/content/partials')
+    this.mkdir('source/content/ pages');
     // Copy sample files to the right directories under markdown
-    this.copy('hello.html.md', 'source/markdown/pages/hello.html.md');
+    this.copy('**/*.md', 'source/markdown/pages/');
     // Copy templates
-    this.copy('posts.html.eco', 'source/markdown/pages/posts.html.eco');
-    this.copy('default.html.eco', 'source/markdown/pages/default.html.eco');
+    this.copy('**/*.hbs', 'source/markdown/layout/');
+    // Do we want to provide templates now or do we want to wait to see if we need them?
 
     // Copy the package templates into their final location
     this.copy('_package.json', 'package.json');
     this.copy('_bower.json', 'bower.json');
     this.copy('_Gruntfile.js', 'Gruntfile.js');
   },
-
+GeneratorWebpublish
   projectfiles: function () {
     this.copy('editorconfig', '.editorconfig');
     // JSHint
@@ -85,4 +86,4 @@ var StarterGenerator = yeoman.generators.Base.extend({
   }
 });
 
-module.exports = StarterGenerator;
+module.exports = GeneratorWebpublish;

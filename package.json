@@ -49,7 +49,6 @@
     "grunt-contrib-jshint": "~0.7.1",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-jasmine": "~0.5.2",
     "grunt-contrib-mincss": "~0.3.2",
     "grunt-contrib-coffee": "~0.7.0",
     "grunt-contrib-sass": "~0.5.0",
@@ -59,6 +58,7 @@
     "matchdep": "^0.3.0",
     "grunt-contrib-clean": "^0.5.0",
     "grunt-autoprefixer": "^0.8.1",
-    "grunt-assemble": "^0.1.15"
+    "grunt-assemble": "^0.1.15",
+    "grunt-compare-size": "~0.4.0"
   }
 }

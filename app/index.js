@@ -8,7 +8,8 @@ var chalk = require('chalk');
 var GeneratorWebpublish = yeoman.generators.Base.extend({
   init: function () {
     this.pkg = yeoman.file.readJSON(path.join(__dirname, '../package.json'));
-    console.log(chalk.magenta('Initiating Generator'));
+    console.log(chalk.magenta('Initiating generator'));
+    console.log(chalk.magenta('webpublish generator is designed to ease your workload for  generating digital content.'));
   },
 /*
   askFor: function () {
@@ -50,21 +51,25 @@ var GeneratorWebpublish = yeoman.generators.Base.extend({
     this.mkdir('app/css');
     this.mkdir('source/sass');
     this.mkdir('source/css');
-    this.mkdir('app/js');
+
     // JS is converted from COFFEE but we have the option to feed JS directly
+    this.mkdir('app/js');
     this.mkdir('source/coffee');
     this.mkdir('source/js');
+
     // Create the files required for markdown/assemble use
     // They wil be saved to the root of the app directory that has already
     // been created
     this.mkdir('source/content/layout');
+    // Right now we are not using partials, this may change in the future as we get lazy
     this.mkdir('source/content/partials')
     this.mkdir('source/content/ pages');
     // Copy sample files to the right directories under markdown
     this.copy('**/*.md', 'source/markdown/pages/');
     // Copy templates
     this.copy('**/*.hbs', 'source/markdown/layout/');
-    // Do we want to provide templates now or do we want to wait to see if we need them?
+    // Copy partials, if any
+    this.copy('partials/**/*.hbs', 'source/markdown/layout/');
 
     // Copy the package templates into their final location
     this.copy('_package.json', 'package.json');

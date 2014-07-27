@@ -1,0 +1,3 @@
+[submodule "app/templates/src/sass"]
+	path = app/templates/src/sass
+	url = https://github.com/caraya/sass-repo

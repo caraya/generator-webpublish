@@ -49,6 +49,8 @@ var GeneratorWebpublish = yeoman.generators.Base.extend({
 
     // CSS is converted from SASS/SCSS but we can feed CSS directly
     this.mkdir('app/css');
+    // We populated the source/sass directory with content from
+    // https://github.com/caraya/sass-repo to provide a starting point
     this.mkdir('source/sass');
     this.mkdir('source/css');
 
@@ -56,6 +58,13 @@ var GeneratorWebpublish = yeoman.generators.Base.extend({
     this.mkdir('app/js');
     this.mkdir('source/coffee');
     this.mkdir('source/js');
+
+    // Copy our master Modernizr build to the source directory
+    // so we can use the modernizr grunt task
+    this.copy('modernizr-dev.js', 'source/modernizr-dev.js'
+              
+    // Copy the content from src/sass to source/sass to make it easier
+    this.copy('sass/**/*.scss', 'source/sass/');
 
     // Create the files required for markdown/assemble use
     // They wil be saved to the root of the app directory that has already

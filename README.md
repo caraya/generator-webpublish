@@ -1,4 +1,4 @@
-# generator-starter 
+# generator-webpublish
 
 > [Yeoman](http://yeoman.io) generator
 
